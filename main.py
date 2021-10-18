@@ -5,7 +5,7 @@ import wget
 
 s = re.Session()
 
-url = "https://coinmarketcal.com/en/coin-ranking?page=1&orderBy=&show_all=true"
+url = "" # redacted because of legal issues
 
 page = re.get(url)
 soup = bs(page.content,"html.parser")
@@ -18,19 +18,9 @@ for count, string in enumerate(imgs):
     codes = nac[nac.find("(")+1:nac.find(")")]+".png"
     url = string['data-src']
 
-    print(f'{count}/{len(imgs)} token: {codes} url: {string["data-src"]}')
-
     try:
         wget.download(url, out="images/"+codes)
     except:
         print(f'{count}. token {codes} could not downloaded!')
     else:
-        print(f'downloaded: {codes}')
-
-print(f'all {len(imgs)} token logo has downloaded')
-
-
-
-
-
-
+        print(f'{count}/{len(imgs)} downloaded: {codes}')
